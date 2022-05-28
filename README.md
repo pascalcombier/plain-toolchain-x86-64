@@ -15,7 +15,7 @@ This project is a very minimal addon to the amazing projects [GNU
 GCC](http://gcc.gnu.org) and [winlibs](https://winlibs.com/). The whole point is
 to have a portable way to install GNU GCC without modification of any Windows
 environment variable (i.e. `%PATH%`). By doing that, the source code of the
-C/C++ project can be easily re-built verbatim on other computers.
+C/C++ project can be easily re-built verbatim on multiple computers.
 
 # Compile the example
 
@@ -85,7 +85,7 @@ plain-toolchain-x86-64. It requires the plugin 'NppExec' to be installed.
 
 ![screenshot](docs/images/screenshot-npp-exec-settings-highlight.png)
 
-Add the custom highlight mask, so that if an error is displayed in the NppExec
+Add the custom highlight mask, so that if an error is displayed in the 'NppExec'
 console, it become highlighted and clickable.
 
 	%FILE%:%LINE%
@@ -119,7 +119,7 @@ C:\Users\Pascal\Desktop\workspace\hello-world\make-helloworld-gui.bat
 
 ![screenshot](docs/images/screenshot-emacs-compile-error.png)
 
-When the user clicks on the error line, `GNU Emacs` will move to buffer to the
+When the user clicks on the error line, GNU Emacs will move to buffer to the
 error line. Press `g` in the `*compilation* buffer to recompile the project.
 
 ![screenshot](docs/images/screenshot-emacs-compile-successful.png)
