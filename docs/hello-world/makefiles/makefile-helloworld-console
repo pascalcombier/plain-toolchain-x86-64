@@ -1,0 +1,82 @@
+#==============================================================================#
+# PROJECT INFORMATION                                                          #
+#==============================================================================#
+
+# Helloworld console
+
+# This file does not support the automatic dependancy management with
+# 'makedepends' or 'MD -MP' flags from GCC. This is made on purpose to keep the
+# makefile simple. But nothing is preventing anyone to add dependancy management
+# to this makefile.
+
+#==============================================================================#
+# PROJECT CONFIGURATION                                                        #
+#==============================================================================#
+
+SRC_DIR    = src
+HEADER_DIR = inc
+BIN_DIR    = bin64
+
+BINARIES += $(BIN_DIR)\helloworld-console.exe
+BINARIES += $(BIN_DIR)\helloworld-console-dbg.exe
+
+SPECIAL_OBJECTS += resources.o
+
+SOURCES += $(SRC_DIR)\helloworld-console.c
+
+INCLUDE_DIRS += -I$(SRC_DIR)
+INCLUDE_DIRS += -I$(HEADER_DIR)
+
+#==============================================================================#
+# GENERIC BUILD CONFIGURATION                                                  #
+#==============================================================================#
+
+# VPATH is the list of directories where to find the sources files
+VPATH += $(SRC_DIR)
+
+RM = DEL 2> NUL
+CC = gcc
+
+CC_FLAGS += -ggdb
+CC_FLAGS += -Wall
+CC_FLAGS += -Wno-format
+CC_FLAGS += -Os
+CC_FLAGS += -fdiagnostics-color=never
+
+OBJECTS_0 = $(notdir $(SOURCES))
+OBJECTS_1 = $(OBJECTS_0:.c=.o)
+OBJECTS_2 = $(OBJECTS_1:.cpp=.o)
+OBJECTS_3 = $(SPECIAL_OBJECTS) $(OBJECTS_2)
+OBJECTS_4 = $(addprefix $(BIN_DIR)\,$(OBJECTS_3))
+OBJECTS   = $(OBJECTS_4)
+
+# Generic rule, build object files from VPATH directory list
+$(BIN_DIR)\\%.o: %.c
+	$(CC) $(CC_FLAGS) $(INCLUDE_DIRS) -c $^ -o $@
+
+$(BIN_DIR)\\%.o: %.cpp
+	$(CXX) $(CC_FLAGS) $(INCLUDE_DIRS) -c $^ -o $@ -fpermissive
+
+#==============================================================================#
+# GNU MAKE RULES                                                               #
+#==============================================================================#
+
+.PHONY: all clean
+
+all: $(BINARIES)
+
+clean:
+	$(RM) $(OBJECTS)
+	$(RM) $(SPECIAL_OBJECTS)
+	$(RM) $(BINARIES)
+
+$(BIN_DIR)\resources.o: src\resources.rc
+	windres $< -o $@
+
+$(BIN_DIR)\helloworld-console-dbg.exe: $(OBJECTS)
+	$(CC) -fdiagnostics-color=never -mconsole $(OBJECTS) -o $@
+
+# Same as -dbg but we strip the final executable
+$(BIN_DIR)\helloworld-console.exe: $(OBJECTS)
+	$(CC) -fdiagnostics-color=never -mconsole $(OBJECTS) -o $@
+	strip $@

@@ -1,0 +1,20 @@
+TEST_ICON ICON "program.ico"
+100 VERSIONINFO
+FILEVERSION 1,0,0,0
+PRODUCTVERSION 1,0,0,0
+FILETYPE 1
+{
+    BLOCK "StringFileInfo"
+    {
+        BLOCK "000004b0"
+        {
+            VALUE "FileDescription",  "My application"
+            VALUE "FileVersion",      "1.0.0"
+            VALUE "InternalName",     "app.exe"
+            VALUE "LegalCopyright",   "Copyright © Test 2022."
+            VALUE "OriginalFilename", "app.exe"
+            VALUE "ProductName",      "app"
+            VALUE "ProductVersion",    "1.0.0"
+        }
+    }
+}
