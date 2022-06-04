@@ -67,7 +67,7 @@ edit the file `cmd-USER-ENVIRONMENT.bat`. If one is using the fantastic [Fossil
 SCM](https://fossil-scm.org/) from Richard HIPP, he could specify the `USER`
 variable in this file.
 
-	set USER=NameOrNickname
+	set USER=Pascal
 
 # Integration with third-party tools
 

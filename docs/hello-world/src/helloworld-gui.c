@@ -122,7 +122,7 @@ int WINAPI WinMain (HINSTANCE hInstance,
   UpdateWindow(WindowHandle);
 
   /* Event loop */
-  while (GetMessage(&Message, NULL, 0, 0))
+  while (GetMessage(&Message, NULL, 0, 0) == TRUE)
   {
     TranslateMessage(&Message);
     DispatchMessage(&Message);
